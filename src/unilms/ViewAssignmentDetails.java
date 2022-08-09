@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
@@ -27,34 +28,30 @@ public class ViewAssignmentDetails extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewAssignmentDetails
+     *
      * @param id
      */
-     String id = "";
-     String name = "";
-     String filetype;
-     File file;
-     String studentname = GlobalClass.loggedinstudent;
-     ImageIcon ic = new ImageIcon("src/Uni Lms.png");
-     
-     
-    public ViewAssignmentDetails(String id, String name)
-    {
+    String date2;
+    String id = "";
+    String name = "";
+    String filetype;
+    File file;
+    String studentname = GlobalClass.loggedinstudent;
+    ImageIcon ic = new ImageIcon("src/Uni Lms.png");
+
+    public ViewAssignmentDetails(String id, String name) {
         initComponents();
         this.id = id;
         this.name = name;
 //        settings.set
-        
-        
-        
+
         viewAssignmentDetails();
-        
-        
+
         setSize(990, 660);
         setResizable(false);
         setTitle("Uni LMS Student Assignment Submission");
         setLocationRelativeTo(null);
-       
-        
+
     }
 
     /**
@@ -370,77 +367,72 @@ public class ViewAssignmentDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_browsebtActionPerformed
 
     private void submitbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitbtActionPerformed
-        // TODO add your handling code here:
-        Date d = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        //            SimpleDateFormat(");
+        try {
+            // TODO add your handling code here:
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+            Date d = new Date();
             String date = sdf.format(d);
 
-            //            String select = buttonGroup1.getSelection().toString();
-            //            System.out.println(select);
+            Date d2 = sdf.parse(date2);
+            if (d.compareTo(d2) > 0) {
+                JOptionPane.showMessageDialog(rootPane, "error");
+            } else {
+                //send request 
 
-           
+                if (file != null) {
 
-            
-            
-            if(file!=null)
-            {
+                    try {
 
-                try
-                {
+                        HttpResponse<String> response = Unirest.post("http://localhost:8080/studentsubmitassignment")
+                                .queryString("assid", id)
+                                .queryString("studentid", studentname)
+                                .queryString("date", date)
+                                .field("file", file).asString();
 
-                    HttpResponse<String> response = Unirest.post("http://localhost:8080/studentsubmitassignment")
-                    .queryString("assid",id)
-                    .queryString("studentid", studentname)
-                    .queryString("date",date)
-                    .field("file",file).asString();
+                        if (response.getStatus() == 200) {
 
-                    if (response.getStatus() == 200) {
-
-                        String feedback5 = response.getBody();
-                        if (feedback5.equals("Fails!!!")) {
-                            //                        JOptionPane.showMessageDialog(this, "Fails!!!");
-                            JOptionPane.showMessageDialog(this, """
-                                !!! OOPS !!!
-                                Error Occured
-                                !!! Try Again !!!""", "Uni LMS Student Assignment Submission", JOptionPane.PLAIN_MESSAGE, ic);
+                            String feedback5 = response.getBody();
+                            if (feedback5.equals("Fails!!!")) {
+                                //                        JOptionPane.showMessageDialog(this, "Fails!!!");
+                                JOptionPane.showMessageDialog(this, """
+                                                                                        !!! OOPS !!!
+                                                                                        Error Occured
+                                                                                        !!! Try Again !!!""", "Uni LMS Student Assignment Submission", JOptionPane.PLAIN_MESSAGE, ic);
                             } else {
                                 //                       String output = "Your Output is";
                                 //                        JOptionPane.showMessageDialog(this, "Your Student Id: " + feedback5 + "\n Your Password is: " + pass2);
                                 JOptionPane.showMessageDialog(this, """
-                                    !!! Done !!!
-                                    Assignment Submitted
-                                    \nReference Submission Id Generated:""" + feedback5
-
-                                    , "Uni LMS Teacher Add ASsignment", JOptionPane.PLAIN_MESSAGE, ic);
+                                                                                        !!! Done !!!
+                                                                                        Assignment Submitted
+                                                                                        \nReference Submission Id Generated:""" + feedback5,
+                                        "Uni LMS Teacher Add ASsignment", JOptionPane.PLAIN_MESSAGE, ic);
 
                                 //                        department.setText(null);
-                           
-
                             }
-                        }
-                        else
-                        {
+                        } else {
                             System.out.println(response.getStatusText());
                         }
 
-                    }
-
-                    catch(Exception ex)
-                    {
+                    } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-                }
-                else
-                {
+                } else {
                     JOptionPane.showMessageDialog(this, """
-                        !!! OOPS !!!
-                        Empty Field Exists
-                        !!! All Fields are Required !!!""", "Uni LMS Teacher Add Notes", JOptionPane.PLAIN_MESSAGE, ic);
-                    }
-        
-        
-        
+                                                                !!! OOPS !!!
+                                                                Empty Field Exists
+                                                                !!! All Fields are Required !!!""", "Uni LMS Teacher Add Notes", JOptionPane.PLAIN_MESSAGE, ic);
+                }
+            }
+            //            SimpleDateFormat(");
+
+            //            String select = buttonGroup1.getSelection().toString();
+            //            System.out.println(select);
+        } catch (ParseException ex) {
+            java.util.logging.Logger.getLogger(ViewAssignmentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_submitbtActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -448,11 +440,8 @@ public class ViewAssignmentDetails extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    private void viewAssignmentDetails()
-    {
+    private void viewAssignmentDetails() {
         try {
-
 
             HttpResponse<String> response = Unirest.get("http://localhost:8080/studentviewassignmentdetails")
                     .queryString("id", id)
@@ -460,38 +449,32 @@ public class ViewAssignmentDetails extends javax.swing.JFrame {
 
             String ans = response.getBody();
             StringTokenizer st = new StringTokenizer(ans, "$$");
-            
-            while(st.hasMoreTokens())
-            {
-                
-            String vnotes = st.nextToken();
-            StringTokenizer st2 = new StringTokenizer(vnotes, ";;;");
+
+            while (st.hasMoreTokens()) {
+
+                String vnotes = st.nextToken();
+                StringTokenizer st2 = new StringTokenizer(vnotes, ";;;");
 
                 String asid = st2.nextToken();
                 String title = st2.nextToken();
                 String details = st2.nextToken();
 
-                
                 String date = st2.nextToken();
-                String date2 = st2.nextToken();
-                
+                date2 = st2.nextToken();
+
                 namelb.setText(name);
                 assid.setText(asid);
                 asstitle.setText(title);
                 assdetails.setText(details);
                 assdate.setText(date);
                 assdate2.setText(date2);
-                
-                
-                
-                
-                
+
             }
-        }
-         catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -522,7 +505,7 @@ public class ViewAssignmentDetails extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewAssignmentDetails("","").setVisible(true);
+                new ViewAssignmentDetails("", "").setVisible(true);
             }
         });
     }

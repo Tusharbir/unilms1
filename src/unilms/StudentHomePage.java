@@ -83,6 +83,7 @@ public class StudentHomePage extends javax.swing.JFrame {
         viewnotes = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -256,6 +257,15 @@ public class StudentHomePage extends javax.swing.JFrame {
         jPanel1.add(jLabel8);
         jLabel8.setBounds(250, 330, 130, 30);
 
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(300, 540, 75, 22);
+
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1140, 700);
 
@@ -305,6 +315,12 @@ public class StudentHomePage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        StudentChat obj = new StudentChat();
+        obj.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -347,6 +363,7 @@ public class StudentHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel TitlePanel;
     private javax.swing.JButton changebt;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

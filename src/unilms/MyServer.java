@@ -318,7 +318,7 @@ public class MyServer extends JHTTPServer {
                 String ans6 = "";
 
                 while (rs.next()) {
-                    String ti, tn, fn, mn, ad, em, mob, dep, sem, cour,photo;
+                    String ti, tn, fn, mn, ad, em, mob, dep, sem, cour, photo;
                     ti = rs.getString("student_id");
                     tn = rs.getString("name");
                     fn = rs.getString("father_name");
@@ -334,7 +334,7 @@ public class MyServer extends JHTTPServer {
 
                     ans6 += ti + ";;;" + tn + ";;;" + fn + ";;;"
                             + mn + ";;;" + ad + ";;;" + em + ";;;"
-                            + mob + ";;;" + dep + ";;;" + sem + ";;;" + cour + ";;;" +photo +"$$";
+                            + mob + ";;;" + dep + ";;;" + sem + ";;;" + cour + ";;;" + photo + "$$";
 
                 }
 
@@ -420,7 +420,7 @@ public class MyServer extends JHTTPServer {
 //                   photo =  rs.getString("photo");
                     ans7 += ti + ";;;" + tn + ";;;" + fn + ";;;"
                             + mn + ";;;" + ad + ";;;" + em + ";;;"
-                            + mob + ";;;" + dep +";;;"+ photo;
+                            + mob + ";;;" + dep + ";;;" + photo;
 
                 }
                 return new Response(HTTP_OK, "text/plain", ans7);
@@ -679,7 +679,7 @@ public class MyServer extends JHTTPServer {
 //                   mob =  rs.getString("qualification");
                     dep = rs.getString("department");
 
-                   photo =  rs.getString("photo");
+                    photo = rs.getString("photo");
                     ans7 += ti + ";;;" + tn + ";;;" + fn + ";;;"
                             + mn + ";;;" + ad + ";;;" + em + ";;;"
                             + mob + ";;;" + course + ";;;" + sem + ";;;" + dep + ";;;" + photo;
@@ -799,13 +799,11 @@ public class MyServer extends JHTTPServer {
                 return new Response(HTTP_OK, "text/plain", ex.toString());
             }
 
-        }
-        
-        else if (uri.equals("/studentviewassignmentdetails")) {
+        } else if (uri.equals("/studentviewassignmentdetails")) {
             try {
 
                 String asid = parms.getProperty("id");
-                ResultSet rs = DBLoader.executeSQL("select * from assignment where assignment_id =\'" + asid+ "\'");
+                ResultSet rs = DBLoader.executeSQL("select * from assignment where assignment_id =\'" + asid + "\'");
                 String ans = "";
 
                 while (rs.next()) {
@@ -815,7 +813,6 @@ public class MyServer extends JHTTPServer {
 
                     title = rs.getString("title");
                     details = rs.getString("details");
-                    
 
                     date = rs.getString("date");
                     date2 = rs.getString("subdate");
@@ -829,10 +826,7 @@ public class MyServer extends JHTTPServer {
                 ex.printStackTrace();
                 return new Response(HTTP_OK, "text/plain", ex.toString());
             }
-        }
-        
-        else if(uri.equals("/studentsubmitassignment"))
-        {
+        } else if (uri.equals("/studentsubmitassignment")) {
             try {
                 String assignmentid = parms.getProperty("assid");
                 String studentid = parms.getProperty("studentid");
@@ -850,20 +844,17 @@ public class MyServer extends JHTTPServer {
                 rs.updateString("student_id", studentid);
                 rs.updateString("date", date);
                 rs.updateString("file", file);
-                
+
                 rs.insertRow();
 
                 ResultSet rs2 = DBLoader.executeSQL("select * from submission ORDER BY submission_id desc");
-                if (rs2.next()) 
-                {
+                if (rs2.next()) {
 //                  
 
                     String submission_id = rs2.getString("assignment_id");
                     return new Response(HTTP_OK, "text/plain", submission_id);
 
-                } 
-                else 
-                {
+                } else {
                     return new Response(HTTP_OK, "text/plain", "Fails!!!");
 
                 }
@@ -872,7 +863,126 @@ public class MyServer extends JHTTPServer {
                 ex.printStackTrace();
                 return new Response(HTTP_OK, "text/plain", ex.toString());
             }
+        } else if (uri.equals("/studentaskquestion")) {
+            try {
+                String name = parms.getProperty("name");
+                String sid = parms.getProperty("id");
+                String question = parms.getProperty("question");
+
+                ResultSet rs = DBLoader.executeSQL("select * from chat");
+
+                rs.moveToInsertRow();
+
+                rs.updateString("student_id", sid);
+                rs.updateString("s_name", name);
+                rs.updateString("question", question);
+
+                rs.insertRow();
+                ResultSet rs2 = DBLoader.executeSQL("select * from chat ORDER BY chatid desc");
+                if (rs2.next()) {
+//                  
+
+                    String chatid = rs2.getString("chatid");
+                    return new Response(HTTP_OK, "text/plain", chatid);
+
+                } else {
+                    return new Response(HTTP_OK, "text/plain", "Fails!!!");
+
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return new Response(HTTP_OK, "text/plain", ex.toString());
+            }
+        } else if (uri.contains("/loadquestion")) {
+            try {
+
+                String dept = parms.getProperty("depart");
+                String course = parms.getProperty("course");
+                String sem = parms.getProperty("sem");
+                ResultSet rs = DBLoader.executeSQL("select * from chat INNER JOIN student ON chat.student_id = student.student_id where student.course=\'" + course + "\' and student.semester = semester and chat.answer = 'na' ");
+                String ans = "";
+
+                while (rs.next()) {
+                    String chatid, sid, sname, question, tid, tname, answer;
+
+                    chatid = rs.getString("chatid");
+                    sid = rs.getString("student_id");
+                    sname = rs.getString("s_name");
+                    question = rs.getString("question");
+
+                    ans += chatid + ";;;" + sid + ";;;" + sname + ";;;" + question
+                            + "$$";
+
+                }
+                return new Response(HTTP_OK, "text/plain", ans);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return new Response(HTTP_OK, "text/plain", ex.toString());
+            }
+        } else if (uri.equals("/teachersendans")) {
+            try {
+                String chatid = parms.getProperty("chatid");
+                String ans = parms.getProperty("ans");
+                String tname = parms.getProperty("teachername");
+                String tid = parms.getProperty("tid");
+
+                ResultSet rs = DBLoader.executeSQL("select * from chat where chatid=\'" + chatid + "\'");
+
+                if (rs.next()) {
+                    rs.updateString("teacher_id", tid);
+                    rs.updateString("t_name", tname);
+                    rs.updateString("answer", ans);
+                    rs.updateRow();
+
+                }
+
+                return new Response(HTTP_OK, "text/plain", "Answer Published !!");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return new Response(HTTP_OK, "text/plain", ex.toString());
+            }
+        } 
+        
+        else if(uri.contains("/studentfetchchat"))
+        {
+            try
+            {
+                String id = parms.getProperty("id");
+                
+                ResultSet rs = DBLoader.executeSQL("select * from  chat where student_id=\'" + id + "\'");
+                String answer,question,tname;
+                String feed="";
+                while(rs.next())
+                {
+                    answer = rs.getString("answer");
+                    question = rs.getString("question");
+                    tname = rs.getString("t_name");
+                    
+                    feed += question +";;;" + answer + ";;;" + tname + "#$#"; 
+                    
+                    
+                }
+                
+                return new Response(HTTP_OK, "text/plain", feed);
+                
+                
+                
+                
+                
+            }
+            
+            catch(Exception ex)
+            {
+                ex.printStackTrace();
+                return new Response(HTTP_OK, "text/plain", ex.toString());
+
+            }
+            
+            
+            
         }
+        
         
         
         
@@ -886,15 +996,7 @@ public class MyServer extends JHTTPServer {
             res = sendCompleteFile(uri);
             return res;
 
-        } 
-        
-        
-        
-        
-        
-        
-        
-        else {
+        } else {
             return new Response(HTTP_OK, "text/plain", "Invalid Uri");
         }
 

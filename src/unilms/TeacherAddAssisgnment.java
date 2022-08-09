@@ -24,67 +24,51 @@ public class TeacherAddAssisgnment extends javax.swing.JFrame {
     /**
      * Creates new form TeacherAddAssisgnment
      */
-    
     String teachername = GlobalClass.loggedinteacher;
-    
-    
+
     String filetype;
     File file;
     String select;
     ImageIcon ic = new ImageIcon("src/Uni Lms.png");
+
     public TeacherAddAssisgnment() {
         initComponents();
-        
-        try
-        {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/teachersetname").queryString("id", teachername).asString(); 
-            if(response.getStatus()==200)
-            {
-            String anss = response.getBody();
+
+        try {
+            HttpResponse<String> response = Unirest.get("http://localhost:8080/teachersetname").queryString("id", teachername).asString();
+            if (response.getStatus() == 200) {
+                String anss = response.getBody();
 //            System.out.println(anss);
 
-            StringTokenizer st3 = new StringTokenizer(anss, ";;;");
-            while (st3.hasMoreTokens()) {
-                String tname,dep;
-                tname = st3.nextToken();
-                tname= tname.toUpperCase();
-                dep = st3.nextToken();
-                
-                
-                
-                
+                StringTokenizer st3 = new StringTokenizer(anss, ";;;");
+                while (st3.hasMoreTokens()) {
+                    String tname, dep;
+                    tname = st3.nextToken();
+                    tname = tname.toUpperCase();
+                    dep = st3.nextToken();
 
 //              photo1 = st3.nextToken(); 
+                    name.setText(tname + "!");
+                    department.setText(dep);
 
-             name.setText(tname+"!");
-             department.setText(dep);
+                }
 
             }
-         
-            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
         }
-        
-        catch (Exception ex) 
-        {
-                ex.printStackTrace();
-        
-        
-        
-       }
-        
-        
+
         fetchcourse();
         setSize(1115, 720);
         setTitle("Uni LMS Teacher Add Assignments");
         setResizable(false);
         setLocationRelativeTo(null);
     }
-    
-    
-        private void fetchcourse()
-    {
+
+    private void fetchcourse() {
         System.out.println("Hello im function");
-         new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
 
@@ -113,15 +97,14 @@ public class TeacherAddAssisgnment extends javax.swing.JFrame {
             }
         }).start();
     }
-    
-    private void fetchsemester()
-    {
+
+    private void fetchsemester() {
         System.out.println("called");
-      new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String course = ccb.getSelectedItem().toString();
-                System.out.println("course---"+course);
+                System.out.println("course---" + course);
                 String de = department.getText();
                 try {
                     HttpResponse<String> response = Unirest.get("http://localhost:8080/getsemester").queryString("course", course).queryString("de", de).asString();
@@ -141,7 +124,7 @@ public class TeacherAddAssisgnment extends javax.swing.JFrame {
                 }
 
             }
-        }).start();  
+        }).start();
     }
 
     /**
@@ -184,6 +167,7 @@ public class TeacherAddAssisgnment extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         submdatetf = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
+        jDate = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -399,6 +383,11 @@ public class TeacherAddAssisgnment extends javax.swing.JFrame {
         jPanel2.add(jSeparator2);
         jSeparator2.setBounds(660, 380, 310, 10);
 
+        jDate.setDateFormatString("dd-MM-yyyy");
+        jDate.setMaxSelectableDate(null);
+        jPanel2.add(jDate);
+        jDate.setBounds(800, 320, 160, 22);
+
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 1100, 690);
 
@@ -426,11 +415,10 @@ public class TeacherAddAssisgnment extends javax.swing.JFrame {
 //        FileNameExtensionFilter filtervideo = new FileNameExtensionFilter("Video Files", "mp4");
         jfc.setAcceptAllFileFilterUsed(false);
         ImageIcon icon = null;
- 
+
         jfc.setFileFilter(filterpdf);
         icon = new ImageIcon("src/pdf-file.png");
         filetype = "Pdf";
-        
 
         int showOpenDialog = jfc.showOpenDialog(this);
         if (showOpenDialog == JFileChooser.APPROVE_OPTION) {
@@ -444,89 +432,83 @@ public class TeacherAddAssisgnment extends javax.swing.JFrame {
     private void addassignmentbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addassignmentbtActionPerformed
 
         // TODO add your handling code here:
+        String d1 = jDate.getDate().toString();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+        Date d2 = jDate.getDate();
+        String subDate = sdf.format(d2);
 
         Date d = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         //            SimpleDateFormat(");
-            String date = sdf.format(d);
+        String date = sdf.format(d);
 
-            //            String select = buttonGroup1.getSelection().toString();
-            //            System.out.println(select);
+        //            String select = buttonGroup1.getSelection().toString();
+        //            System.out.println(select);
+        select = "pdf";
 
-            select = "pdf";
+        String dept, course, sem, title, details, subdate;
+        dept = department.getText();
+        course = ccb.getSelectedItem().toString();
+        sem = semcb.getSelectedItem().toString();
+        title = titlelb.getText();
+        details = detailslb.getText();
+        subdate = submdatetf.getText();
 
-            String dept,course,sem,title,details,subdate;
-            dept = department.getText();
-            course = ccb.getSelectedItem().toString();
-            sem = semcb.getSelectedItem().toString();
-            title = titlelb.getText();
-            details = detailslb.getText();
-            subdate = submdatetf.getText();
+        if (!title.isEmpty() && !details.isEmpty() && !subdate.isEmpty() && file != null) {
 
-            if(!title.isEmpty() && !details.isEmpty() &&  !subdate.isEmpty() &&file!=null)
-            {
+            try {
 
-                try
-                {
+                HttpResponse<String> response = Unirest.post("http://localhost:8080/TeacherAddAssignment")
+                        .queryString("dept", dept)
+                        .queryString("course", course)
+                        .queryString("sem", sem)
+                        .queryString("title", title)
+                        .queryString("details", details)
+                        .queryString("id", teachername)
+                        .queryString("date", date)
+                        .queryString("type", select)
+                        .queryString("subdate", subdate)
+                        .field("file", file).asString();
 
-                    HttpResponse<String> response = Unirest.post("http://localhost:8080/TeacherAddAssignment")
-                    .queryString("dept",dept)
-                    .queryString("course", course)
-                    .queryString("sem",sem)
-                    .queryString("title", title)
-                    .queryString("details", details)
-                    .queryString("id",teachername)
-                    .queryString("date",date)
-                    .queryString("type",select)
-                    .queryString("subdate",subdate)
-                    .field("file",file).asString();
+                if (response.getStatus() == 200) {
 
-                    if (response.getStatus() == 200) {
-
-                        String feedback5 = response.getBody();
-                        if (feedback5.equals("Fails!!!")) {
-                            //                        JOptionPane.showMessageDialog(this, "Fails!!!");
-                            JOptionPane.showMessageDialog(this, """
+                    String feedback5 = response.getBody();
+                    if (feedback5.equals("Fails!!!")) {
+                        //                        JOptionPane.showMessageDialog(this, "Fails!!!");
+                        JOptionPane.showMessageDialog(this, """
                                 !!! OOPS !!!
                                 Error Occured
                                 !!! Try Again !!!""", "Uni LMS Teacher Add Assignment", JOptionPane.PLAIN_MESSAGE, ic);
-                            } else {
-                                //                       String output = "Your Output is";
-                                //                        JOptionPane.showMessageDialog(this, "Your Student Id: " + feedback5 + "\n Your Password is: " + pass2);
-                                JOptionPane.showMessageDialog(this, """
+                    } else {
+                        //                       String output = "Your Output is";
+                        //                        JOptionPane.showMessageDialog(this, "Your Student Id: " + feedback5 + "\n Your Password is: " + pass2);
+                        JOptionPane.showMessageDialog(this, """
                                     !!! Done !!!
                                     Notes Added
-                                    \nYour Assignment Id Generated:""" + feedback5
+                                    \nYour Assignment Id Generated:""" + feedback5,
+                                "Uni LMS Teacher Add ASsignment", JOptionPane.PLAIN_MESSAGE, ic);
 
-                                    , "Uni LMS Teacher Add ASsignment", JOptionPane.PLAIN_MESSAGE, ic);
-
-                                //                        department.setText(null);
-                                titlelb.setText(null);
-                                detailslb.setText(null);
-                                file=null;
-                                lbphoto.setText(null);
-
-                            }
-                        }
-                        else
-                        {
-                            System.out.println(response.getStatusText());
-                        }
+                        //                        department.setText(null);
+                        titlelb.setText(null);
+                        detailslb.setText(null);
+                        file = null;
+                        lbphoto.setText(null);
 
                     }
-
-                    catch(Exception ex)
-                    {
-                        ex.printStackTrace();
-                    }
+                } else {
+                    System.out.println(response.getStatusText());
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(this, """
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, """
                         !!! OOPS !!!
                         Empty Field Exists
                         !!! All Fields are Required !!!""", "Uni LMS Teacher Add Notes", JOptionPane.PLAIN_MESSAGE, ic);
-                    }
+        }
 
     }//GEN-LAST:event_addassignmentbtActionPerformed
 
@@ -536,7 +518,7 @@ public class TeacherAddAssisgnment extends javax.swing.JFrame {
         titlelb.setText(null);
         detailslb.setText(null);
         lbpath.setText("File Name Will Appear Here");
-        file=null;
+        file = null;
         lbphoto.setText(null);
 
     }//GEN-LAST:event_resetbtActionPerformed
@@ -588,6 +570,7 @@ public class TeacherAddAssisgnment extends javax.swing.JFrame {
     private javax.swing.JLabel department;
     private javax.swing.JTextArea detailslb;
     private javax.swing.JButton jButton4;
+    private com.toedter.calendar.JDateChooser jDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

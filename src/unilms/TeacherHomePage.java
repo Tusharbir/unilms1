@@ -102,6 +102,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        querybt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -335,6 +336,15 @@ public class TeacherHomePage extends javax.swing.JFrame {
         jPanel1.add(jLabel11);
         jLabel11.setBounds(400, 560, 160, 30);
 
+        querybt.setText("View Queries");
+        querybt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                querybtActionPerformed(evt);
+            }
+        });
+        jPanel1.add(querybt);
+        querybt.setBounds(630, 440, 200, 100);
+
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1140, 700);
 
@@ -406,6 +416,12 @@ public class TeacherHomePage extends javax.swing.JFrame {
         obj.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void querybtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_querybtActionPerformed
+        // TODO add your handling code here:
+        TeacherViewQuestions obj = new TeacherViewQuestions();
+        obj.setVisible(true);
+    }//GEN-LAST:event_querybtActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -468,6 +484,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel name;
+    private javax.swing.JButton querybt;
     private javax.swing.JButton viewbt;
     private javax.swing.JButton viewnotes;
     // End of variables declaration//GEN-END:variables
