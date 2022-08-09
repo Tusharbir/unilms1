@@ -44,7 +44,11 @@ public class StudentChat extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jChatArea.setContentType("text/html");
-        setSize(700, 700);
+        setSize(1145, 710);
+        setTitle("Uni LMS Student-Teacher Query Forum");
+        setResizable(false);
+        setLocationRelativeTo(null);
+        
         loadchat();
     }
 
@@ -64,39 +68,94 @@ public class StudentChat extends javax.swing.JFrame {
         talb = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         submitbt = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
+        jChatArea.setEditable(false);
+        jChatArea.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(jChatArea);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(40, 40, 930, 320);
+        jScrollPane1.setBounds(80, 160, 990, 320);
 
+        talb.setBackground(new java.awt.Color(255, 255, 255));
         talb.setColumns(20);
         talb.setRows(5);
         jScrollPane2.setViewportView(talb);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(260, 380, 470, 130);
+        jScrollPane2.setBounds(130, 550, 610, 110);
 
-        jLabel1.setText("Question");
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Post New Query");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(100, 410, 120, 50);
+        jLabel1.setBounds(140, 520, 190, 30);
 
-        submitbt.setText("Submit");
+        submitbt.setBackground(new java.awt.Color(255, 255, 255));
+        submitbt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/note (1).png"))); // NOI18N
+        submitbt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         submitbt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitbtActionPerformed(evt);
             }
         });
         jPanel1.add(submitbt);
-        submitbt.setBounds(800, 410, 170, 50);
+        submitbt.setBounds(820, 550, 130, 110);
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Query Forum");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(480, 70, 210, 60);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/icons8-chat.gif"))); // NOI18N
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(290, 0, 180, 150);
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Teacher Student");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(460, 20, 250, 60);
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/Uni Lms.png"))); // NOI18N
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(840, 0, 290, 100);
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/back.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(0, 0, 50, 50);
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Back");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(0, 50, 50, 16);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 1020, 550);
+        jPanel1.setBounds(0, 0, 1130, 710);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -143,6 +202,11 @@ public class StudentChat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_submitbtActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void loadchat() {
         try {
             HttpResponse<String> response = Unirest.get("http://localhost:8080/studentfetchchat")
@@ -161,7 +225,7 @@ public class StudentChat extends javax.swing.JFrame {
                     String answer = st.nextToken();
                     String teachname = st.nextToken();
                     if (answer.equals("na")) {
-                        chat += "<h1 align=\"left\" style=\"color:red;\"><b>Question:- </b>" + ques + "</h1>";
+                        chat += "<h1 align=\"left\" style=font-family:timesnewroman\"color:red;\"><b>Question:- </b>" + ques + "</h1>";
                         chat += "<h2 align=\"left\" style=\"color:black;\">Not Answered Yet !!</h2>";
                         chat += "<h1 style=\"color:black;\"><b>____________________________________________________</b></h1>";
                     } else {
@@ -217,8 +281,14 @@ public class StudentChat extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JEditorPane jChatArea;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

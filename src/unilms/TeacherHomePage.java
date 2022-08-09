@@ -103,6 +103,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         querybt = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -332,18 +333,29 @@ public class TeacherHomePage extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Manage Assignments");
+        jLabel11.setText("Query Forum");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(400, 560, 160, 30);
+        jLabel11.setBounds(670, 550, 140, 30);
 
-        querybt.setText("View Queries");
+        querybt.setBackground(new java.awt.Color(255, 255, 255));
+        querybt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/icons8-chat-128.png"))); // NOI18N
+        querybt.setBorder(null);
+        querybt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         querybt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 querybtActionPerformed(evt);
             }
         });
         jPanel1.add(querybt);
-        querybt.setBounds(630, 440, 200, 100);
+        querybt.setBounds(660, 410, 150, 140);
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Manage Assignments");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(400, 560, 160, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1140, 700);
@@ -471,6 +483,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -7,6 +7,8 @@ package unilms;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import java.util.StringTokenizer;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -18,7 +20,9 @@ public class StudentHomePage extends javax.swing.JFrame {
      * Creates new form StudentHomePage
      */
     String studentname = GlobalClass.loggedinstudent;
-
+    ImageIcon loading = new ImageIcon("icons8-chat-128.png");
+    JLabel lb2;
+    
     public StudentHomePage() {
         initComponents();
         try {
@@ -84,6 +88,7 @@ public class StudentHomePage extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -221,9 +226,9 @@ public class StudentHomePage extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("View Assignments");
+        jLabel7.setText("Query Forum");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(470, 330, 150, 30);
+        jLabel7.setBounds(720, 390, 150, 30);
 
         viewnotes.setBackground(new java.awt.Color(255, 255, 255));
         viewnotes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/icons8-notes-128.png"))); // NOI18N
@@ -235,7 +240,7 @@ public class StudentHomePage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(viewnotes);
-        viewnotes.setBounds(240, 190, 150, 140);
+        viewnotes.setBounds(260, 250, 150, 140);
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/icons8-assignment-128 (2).png"))); // NOI18N
@@ -247,7 +252,7 @@ public class StudentHomePage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(470, 190, 150, 140);
+        jButton1.setBounds(490, 250, 150, 140);
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -255,16 +260,27 @@ public class StudentHomePage extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("View Notes");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(250, 330, 130, 30);
+        jLabel8.setBounds(270, 390, 130, 30);
 
-        jButton2.setText("jButton2");
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/icons8-chat-128.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(300, 540, 75, 22);
+        jButton2.setBounds(720, 250, 150, 140);
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("View Assignments");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(490, 390, 150, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1140, 700);
@@ -317,6 +333,11 @@ public class StudentHomePage extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        QueryForumLoading object = new QueryForumLoading();
+        object.setVisible(true);
+        
+        
         StudentChat obj = new StudentChat();
         obj.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -373,6 +394,7 @@ public class StudentHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

@@ -62,7 +62,10 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
         fetchcourse();
 
         jTable1.setModel(tm4);
-        setSize(900, 900);
+        setSize(1165, 800);
+        setTitle("Uni LMS Student-Teacher Query Forum");
+        setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -88,6 +91,10 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
         ccb = new javax.swing.JComboBox<>();
         semcb = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -99,7 +106,7 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Select Semester");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(700, 120, 130, 20);
+        jLabel6.setBounds(570, 120, 130, 20);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
@@ -112,14 +119,14 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Department of ");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(470, 30, 220, 30);
+        jLabel2.setBounds(440, 10, 220, 30);
 
         department.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
         department.setForeground(new java.awt.Color(51, 51, 51));
         department.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         department.setText("CSE");
         jPanel1.add(department);
-        department.setBounds(460, 70, 240, 40);
+        department.setBounds(430, 50, 240, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,27 +142,34 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(100, 250, 940, 340);
+        jScrollPane1.setBounds(30, 210, 1100, 360);
 
+        anstalb.setBackground(new java.awt.Color(255, 255, 255));
         anstalb.setColumns(20);
+        anstalb.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         anstalb.setRows(5);
         jScrollPane2.setViewportView(anstalb);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(330, 620, 450, 86);
+        jScrollPane2.setBounds(210, 620, 560, 110);
 
-        jLabel1.setText("Post  Answer");
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Post Answer");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(170, 650, 110, 40);
+        jLabel1.setBounds(210, 590, 130, 30);
 
-        jButton1.setText("Publosh");
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/note (1).png"))); // NOI18N
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(900, 640, 73, 22);
+        jButton1.setBounds(800, 620, 110, 110);
 
         ccb.setBackground(new java.awt.Color(255, 255, 255));
         ccb.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -167,22 +181,54 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ccb);
-        ccb.setBounds(100, 160, 380, 40);
+        ccb.setBounds(100, 150, 380, 40);
 
         semcb.setBackground(new java.awt.Color(255, 255, 255));
         semcb.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         semcb.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.add(semcb);
-        semcb.setBounds(690, 160, 380, 40);
+        semcb.setBounds(570, 150, 380, 40);
 
-        jButton2.setText("jButton2");
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/icons8-view-48.png"))); // NOI18N
+        jButton2.setToolTipText("");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(900, 210, 75, 22);
+        jButton2.setBounds(970, 130, 54, 50);
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Show");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(967, 180, 60, 17);
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/Uni Lms.png"))); // NOI18N
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(860, 0, 290, 100);
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/back.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3);
+        jButton3.setBounds(0, 0, 50, 50);
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Back");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(0, 50, 50, 16);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1150, 760);
@@ -314,16 +360,31 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
             }
             else
             {
-                
-            }
-            
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/teachersendans")
+                HttpResponse<String> response = Unirest.get("http://localhost:8080/teachersendans")
                     
                     .queryString("ans", ans)
                     .queryString("chatid",chatid)
                     .queryString("teachername",tname)
                     .queryString("tid",tid)
                     .asString();
+                
+                String feedback = response.getBody();
+                if(feedback.equals("Answer Published !!"))
+                {
+                    JOptionPane.showMessageDialog(this, """
+                                                                Answer Published
+                                                                !!!!!!!!!!!!!!!!!""", "Uni LMS Teacher-Student Forums", JOptionPane.PLAIN_MESSAGE, ic); 
+                }
+                else
+                {
+                     JOptionPane.showMessageDialog(this, """
+                                                                Error Occured
+                                                                !!!!!!!!!!!!!!""", "Uni LMS Teacher-Student Forums", JOptionPane.PLAIN_MESSAGE, ic);
+                }
+                
+            }
+            
+            
             
             
             
@@ -341,6 +402,11 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         loadQuestions();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void fetchcourse() {
         System.out.println("Hello im function");
@@ -444,10 +510,14 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
     private javax.swing.JLabel department;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
