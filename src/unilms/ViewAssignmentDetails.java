@@ -384,7 +384,7 @@ public class ViewAssignmentDetails extends javax.swing.JFrame {
 
                     try {
 
-                        HttpResponse<String> response = Unirest.post("http://localhost:8080/studentsubmitassignment")
+                        HttpResponse<String> response = Unirest.post(GlobalClass.serverAddress+"studentsubmitassignment")
                                 .queryString("assid", id)
                                 .queryString("studentid", studentname)
                                 .queryString("date", date)
@@ -443,7 +443,7 @@ public class ViewAssignmentDetails extends javax.swing.JFrame {
     private void viewAssignmentDetails() {
         try {
 
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/studentviewassignmentdetails")
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"studentviewassignmentdetails")
                     .queryString("id", id)
                     .asString();
 

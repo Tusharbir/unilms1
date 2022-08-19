@@ -309,7 +309,7 @@ public class AdminAddTeacher extends javax.swing.JFrame {
                 {
 //                    .field("photo",f)
                     
-                HttpResponse<String> response = Unirest.post("http://localhost:8080/adminaddteacher")
+                HttpResponse<String> response = Unirest.post(GlobalClass.serverAddress+"adminaddteacher")
                 .queryString("teacher",tname).queryString("fathern",fname).queryString("address",add).queryString("email",email).queryString("phn",phone).queryString("quali",qual).queryString("dept",depart).queryString("pass",pass).field("photo",f).asString(); 
                
                if(response.getStatus()==200)
@@ -336,7 +336,11 @@ public class AdminAddTeacher extends javax.swing.JFrame {
 //                                                                """+pass
 //                                                                 , "Uni LMS Admin Add Teacher", JOptionPane.PLAIN_MESSAGE, ic);
                        
-                       sms_sender.send(phone, "Teacher Id: "+ feedback4+"\nOTP/Temporary Password: "+pass);
+//                       sms_sender.send(phone, "Teacher Id: "+ feedback4+"\nOTP/Temporary Password: "+pass);
+                       
+                       sms_sender.send(phone,"UNI LMS Welcomes You! \nDear " +tname+ "!\nYou are now Enrolled as Teacher \nYour Teacher/Username Id is: "+feedback4+".\nYour Temporary Password is: "+pass+".\nPlease Change Your Password after First Login.");
+                       
+                    
                        tntf.setText(null);
                        fntf.setText(null);
                        addta.setText(null);

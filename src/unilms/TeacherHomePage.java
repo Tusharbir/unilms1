@@ -26,7 +26,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
         
         try
         {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/teachersetname").queryString("id", teachername).asString(); 
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"teachersetname").queryString("id", teachername).asString(); 
             if(response.getStatus()==200)
             {
             String anss = response.getBody();
@@ -374,7 +374,7 @@ public class TeacherHomePage extends javax.swing.JFrame {
         System.out.println("i am first");
         try
         {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/teacherviewprofile").queryString("id", teachername).asString(); 
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"teacherviewprofile").queryString("id", teachername).asString(); 
         }
         catch (Exception ex) 
         {

@@ -229,7 +229,7 @@ public class TeacherChangePassword extends javax.swing.JFrame {
                     String p = optf.getText();
                     String p2 = nptf.getText();
 
-                    HttpResponse<String> response = Unirest.get("http://localhost:8080/teacherchangepassword")
+                    HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"teacherchangepassword")
                     .queryString("user",u).queryString("pass",p).queryString("newpass",p2).asString();
 
                     if(response.getStatus()==200)

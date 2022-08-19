@@ -372,7 +372,7 @@ public class AdminAddStudent extends javax.swing.JFrame {
                 try {
                     ccb.removeAllItems();
 
-                    HttpResponse<String> response = Unirest.get("http://localhost:8080/getcourse").queryString("depart", depart).asString();
+                    HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"getcourse").queryString("depart", depart).asString();
 
                     //  System.out.println(ans4);
                     if (response.getStatus() == 200) {
@@ -416,7 +416,7 @@ public class AdminAddStudent extends javax.swing.JFrame {
                 String course = ccb.getSelectedItem().toString();
                 String de = departcb.getSelectedItem().toString();
                 try {
-                    HttpResponse<String> response = Unirest.get("http://localhost:8080/getsemester").queryString("course", course).queryString("de", de).asString();
+                    HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"getsemester").queryString("course", course).queryString("de", de).asString();
                     if (response.getStatus() == 200) {
                         semcb.removeAllItems();
                         String ans5 = response.getBody();
@@ -457,7 +457,7 @@ public class AdminAddStudent extends javax.swing.JFrame {
             if(mobile.length()==10 & email.contains("@"))
             {
             try {
-                HttpResponse<String> response = Unirest.post("http://localhost:8080/adminaddstudent")
+                HttpResponse<String> response = Unirest.post(GlobalClass.serverAddress+"adminaddstudent")
                         .queryString("student_name", studentname)
                         .queryString("father_name", fathername)
                         .queryString("mother_name", mothername)

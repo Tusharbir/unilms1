@@ -47,7 +47,7 @@ public class StudentChat extends javax.swing.JFrame {
       
 
         try {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/studentsetname").queryString("id", studentid).asString();
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"studentsetname").queryString("id", studentid).asString();
 
             String anss = response.getBody();
             System.out.println(anss);
@@ -183,7 +183,7 @@ public class StudentChat extends javax.swing.JFrame {
         String question = talb.getText();
         if (!question.isEmpty()) {
             try {
-                HttpResponse<String> response = Unirest.get("http://localhost:8080/studentaskquestion")
+                HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"studentaskquestion")
                         .queryString("id", studentid)
                         .queryString("name", name)
                         .queryString("question", question)
@@ -226,7 +226,7 @@ public class StudentChat extends javax.swing.JFrame {
 
     private void loadchat() {
         try {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/studentfetchchat")
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"studentfetchchat")
                     .queryString("id", studentid)
                     .asString();
 

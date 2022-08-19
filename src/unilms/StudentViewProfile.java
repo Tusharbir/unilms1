@@ -27,7 +27,7 @@ public class StudentViewProfile extends javax.swing.JFrame {
     public StudentViewProfile() {
         initComponents();
         try {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/studentviewprofile").queryString("id", studentname).asString();
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"studentviewprofile").queryString("id", studentname).asString();
 
             String anss = response.getBody();
             System.out.println(anss);
@@ -62,7 +62,7 @@ public class StudentViewProfile extends javax.swing.JFrame {
 
                 //photo code starts here----------------------
                 try {
-                    URL url = new URL("http://localhost:8080/getresource/" + photo1);
+                    URL url = new URL(GlobalClass.serverAddress+"getresource/" + photo1);
                     BufferedImage img = ImageIO.read(url);
                     Image newimg = img.getScaledInstance(jPhotoLb.getWidth(), jPhotoLb.getHeight(), Image.SCALE_SMOOTH);
                     jPhotoLb.setIcon(new ImageIcon(newimg));

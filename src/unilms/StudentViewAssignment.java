@@ -31,7 +31,7 @@ public class StudentViewAssignment extends javax.swing.JFrame {
         initComponents();
 
         try {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/studentsetname").queryString("id", studentname).asString();
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"studentsetname").queryString("id", studentname).asString();
             if (response.getStatus() == 200) {
                 String anss = response.getBody();
 //            System.out.println(anss);
@@ -76,7 +76,7 @@ public class StudentViewAssignment extends javax.swing.JFrame {
             String course = courselb.getText().toLowerCase();
             String sem = semlb.getText();
 
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/studentviewassignment")
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"studentviewassignment")
                     .queryString("depart", dept)
                     .queryString("course", course)
                     .queryString("sem", sem)

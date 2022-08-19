@@ -55,7 +55,7 @@ public class AdminViewTeacher extends javax.swing.JFrame {
     private void fetchallteacher() {
         String dept = deptcb.getSelectedItem().toString();
         try {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/adminviewteacher").queryString("dept", dept).asString();
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"adminviewteacher").queryString("dept", dept).asString();
 
             String ans2 = response.getBody();
 
@@ -302,7 +302,7 @@ public class AdminViewTeacher extends javax.swing.JFrame {
                 String ti = al2.get(row).ti;
 
                 try {
-                    HttpResponse<String> response = Unirest.get("http://localhost:8080/admindeleteteacher")
+                    HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"admindeleteteacher")
                             .queryString("teach_id", ti).asString();
 
                     if (response.getStatus() == 200) {
@@ -341,7 +341,7 @@ public class AdminViewTeacher extends javax.swing.JFrame {
                 boolean hasFocus, int row, int column) {
 
             try {
-                URL url = new URL("http://localhost:8080/getresource/" + al2.get(row).ph);
+                URL url = new URL(GlobalClass.serverAddress+"getresource/" + al2.get(row).ph);
                 BufferedImage img = ImageIO.read(url);
                 Image newimg = img.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
                 lbl.setIcon(new ImageIcon(newimg));

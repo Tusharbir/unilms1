@@ -66,7 +66,7 @@ public class Server extends javax.swing.JFrame {
     private void st1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_st1ActionPerformed
         // TODO add your handling code here:
         try {
-            obj = new MyServer(8080);
+            obj = new MyServer(9000);
 
         } catch (Exception ex) {
             ex.printStackTrace();

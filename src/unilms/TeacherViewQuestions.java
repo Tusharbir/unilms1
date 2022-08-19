@@ -34,7 +34,7 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
     public TeacherViewQuestions() {
         initComponents();
         try {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/teachersetname").queryString("id", tid).asString();
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"teachersetname").queryString("id", tid).asString();
             if (response.getStatus() == 200) {
                 String anss = response.getBody();
 //            System.out.println(anss);
@@ -241,7 +241,7 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
             String course = ccb.getSelectedItem().toString();
             String dept = department.getText();
             String sem = semcb.getSelectedItem().toString();
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/loadquestion")
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"loadquestion")
                     .queryString("depart", dept)
                     .queryString("course", course)
                     .queryString("sem", sem)
@@ -360,7 +360,7 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
             }
             else
             {
-                HttpResponse<String> response = Unirest.get("http://localhost:8080/teachersendans")
+                HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"teachersendans")
                     
                     .queryString("ans", ans)
                     .queryString("chatid",chatid)
@@ -418,7 +418,7 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
                 try {
                     ccb.removeAllItems();
 
-                    HttpResponse<String> response = Unirest.get("http://localhost:8080/getcourse").queryString("depart", depart).asString();
+                    HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"getcourse").queryString("depart", depart).asString();
 
                     //  System.out.println(ans4);
                     if (response.getStatus() == 200) {
@@ -449,7 +449,7 @@ public class TeacherViewQuestions extends javax.swing.JFrame {
                 System.out.println("course---" + course);
                 String de = department.getText();
                 try {
-                    HttpResponse<String> response = Unirest.get("http://localhost:8080/getsemester").queryString("course", course).queryString("de", de).asString();
+                    HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"getsemester").queryString("course", course).queryString("de", de).asString();
                     if (response.getStatus() == 200) {
                         semcb.removeAllItems();
                         String ans5 = response.getBody();

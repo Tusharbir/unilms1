@@ -28,7 +28,7 @@ public class TeacherViewProfile extends javax.swing.JFrame {
         initComponents();
 
         try {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/teacherviewprofile").queryString("id", teachername).asString();
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"teacherviewprofile").queryString("id", teachername).asString();
 
             String anss = response.getBody();
             System.out.println(anss);
@@ -61,7 +61,7 @@ public class TeacherViewProfile extends javax.swing.JFrame {
                 
                 
                 try {
-                    URL url = new URL("http://localhost:8080/getresource/" + photo1);
+                    URL url = new URL(GlobalClass.serverAddress+"getresource/" + photo1);
                     BufferedImage img = ImageIO.read(url);
                     Image newimg = img.getScaledInstance(photolb.getWidth(), photolb.getHeight(), Image.SCALE_SMOOTH);
                     photolb.setIcon(new ImageIcon(newimg));

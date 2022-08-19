@@ -170,7 +170,7 @@ public class StudentLoginPage extends javax.swing.JFrame {
             String u = usertf.getText();
             String p = passtf.getText();
 
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/studentlogin")
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"studentlogin")
             .queryString("user",u).queryString("pass",p).asString();
 
             if(response.getStatus()==200)

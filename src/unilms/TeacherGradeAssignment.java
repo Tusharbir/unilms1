@@ -35,7 +35,7 @@ public class TeacherGradeAssignment extends javax.swing.JFrame {
     public TeacherGradeAssignment() {
         initComponents();
         try {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/teachersetname").queryString("id", teachername).asString();
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"teachersetname").queryString("id", teachername).asString();
             if (response.getStatus() == 200) {
                 String anss = response.getBody();
 //            System.out.println(anss);
@@ -246,7 +246,7 @@ public class TeacherGradeAssignment extends javax.swing.JFrame {
     private void fetchassignment() {
         try {
 
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/teachergradeassignment")
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"teachergradeassignment")
                     .queryString("id", teachername)
                     .asString();
 
@@ -342,7 +342,7 @@ public class TeacherGradeAssignment extends javax.swing.JFrame {
                     FileOutputStream fos = null;
                     try {
                         String filepath = al4.get(index).file;
-                        HttpResponse<InputStream> HttpResponse = Unirest.get("http://localhost:8080/getresource/" + filepath).asBinary();
+                        HttpResponse<InputStream> HttpResponse = Unirest.get(GlobalClass.serverAddress+"getresource/" + filepath).asBinary();
                         String filename = filepath.substring(filepath.lastIndexOf("/"));
                         InputStream is = HttpResponse.getBody();
                         fos = new FileOutputStream(System.getProperty("user.home") + "/Downloads/" + filename);
@@ -393,7 +393,7 @@ public class TeacherGradeAssignment extends javax.swing.JFrame {
                 try {
                     ccb.removeAllItems();
 
-                    HttpResponse<String> response = Unirest.get("http://localhost:8080/getcourse").queryString("depart", depart).asString();
+                    HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"getcourse").queryString("depart", depart).asString();
 
                     //  System.out.println(ans4);
                     if (response.getStatus() == 200) {
@@ -424,7 +424,7 @@ public class TeacherGradeAssignment extends javax.swing.JFrame {
                 System.out.println("course---" + course);
                 String de = department.getText();
                 try {
-                    HttpResponse<String> response = Unirest.get("http://localhost:8080/getsemester").queryString("course", course).queryString("de", de).asString();
+                    HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"getsemester").queryString("course", course).queryString("de", de).asString();
                     if (response.getStatus() == 200) {
                         semcb.removeAllItems();
                         String ans5 = response.getBody();

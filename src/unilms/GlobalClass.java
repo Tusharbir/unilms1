@@ -11,6 +11,7 @@ package unilms;
 public class GlobalClass
 {
     
+    public static String serverAddress="http://localhost:9000/";
     public static String loggedinadmin = "";
     public static String loggedinteacher = "";
     public static String loggedinstudent = "";

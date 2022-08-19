@@ -46,7 +46,7 @@ public class AdminViewCourse extends javax.swing.JFrame {
     private void fetchallcourse() {
         System.out.println("func called");
         try {
-            HttpResponse<String> response = Unirest.get("http://localhost:8080/adminviewcourse").asString();
+            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"adminviewcourse").asString();
 
             String ans = response.getBody();
             StringTokenizer st = new StringTokenizer(ans, "$$");
@@ -243,7 +243,7 @@ public class AdminViewCourse extends javax.swing.JFrame {
 //            System.out.println(se);
 //            System.out.println(de);
             try {
-                HttpResponse<String> response = Unirest.get("http://localhost:8080/admindeletecourse")
+                HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"admindeletecourse")
                         .queryString("course", course).queryString("depart", de).queryString("sem", se).asString();
 
                 if (response.getStatus() == 200) {

@@ -260,7 +260,7 @@ public class AdminAddCourse extends javax.swing.JFrame {
                 if (!cname.isEmpty() && !dname.isEmpty() && !snum.isEmpty() && !desc.isEmpty()) {
                     if (!dname.equals("Select Department")) {
                         try {
-                            HttpResponse<String> response = Unirest.get("http://localhost:8080/adminaddcourse")
+                            HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"adminaddcourse")
                                     .queryString("coursename", cname).queryString("department", dname).queryString("semester", snum).queryString("description", desc).asString();
 
                             if (response.getStatus() == 200) {
