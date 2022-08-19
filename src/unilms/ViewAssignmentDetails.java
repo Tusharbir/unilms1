@@ -6,8 +6,10 @@ package unilms;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -301,47 +303,58 @@ public class ViewAssignmentDetails extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void downloadbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadbtActionPerformed
-        // TODO add your handling code here:
-//        new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//
-//                    FileOutputStream fos = null;
-//                    try {
-//                        String filepath = al.get(index).file;
-//                        HttpResponse<InputStream> HttpResponse = Unirest.get("http://localhost:8888/GetResource/" + filepath).asBinary();
-//                        String filename = filepath.substring(filepath.lastIndexOf("/"));
-//                        InputStream is = HttpResponse.getBody();
-//                        fos = new FileOutputStream(System.getProperty("user.home") + "/Downloads/" + filename);
-//                        String downloadfile = System.getProperty("user.home") + "/Downloads/" + filename;
-//                        long contentlength = Integer.parseInt(HttpResponse.getHeaders().getFirst("Content-Length"));
-//                        byte b[] = new byte[10000];
-//                        int r;
-//                        long count = 0;
-//                        while (true) {
-//                            r = is.read(b, 0, 10000);
-//                            fos.write(b, 0, r);
-//                            count = count + r;
-//                            int per = (int) (count * 100 / contentlength);
-//                            if (count == contentlength) {
-//                                break;
-//                            }
-//                        }
-//                        fos.close();
-//                        JOptionPane.showMessageDialog(viewsubmittedassignments.this, "file downloaded");
-//                        Desktop.getDesktop().open(new File(downloadfile));
-//                    } catch (Exception ex) {
-//                        Logger.getLogger(teacherviewassignment.class.getName()).log(Level.SEVERE, null, ex);
-//                    } finally {
-//                        try {
-//                            fos.close();
-//                        } catch (IOException ex) {
-//                            Logger.getLogger(teacherviewassignment.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//                    }
-//                }
-//
-//            }).start();
+
+
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    FileOutputStream fos = null;
+                    try {
+                        HttpResponse<String> response = Unirest.get(GlobalClass.serverAddress+"studentdownloadassignment")
+                    .queryString("id", id)
+                    .asString();
+
+                        String ans = response.getBody();
+                        String filepath = ans;
+                        HttpResponse<InputStream> HttpResponse = Unirest.get(GlobalClass.serverAddress+"getresource/" + filepath).asBinary();
+                        String filename = filepath.substring(filepath.lastIndexOf("/"));
+                        InputStream is = HttpResponse.getBody();
+                        fos = new FileOutputStream(System.getProperty("user.home") + "/Downloads/" + filename);
+                        String downloadfile = System.getProperty("user.home") + "/Downloads/" + filename;
+                        System.out.println("path---------  "+downloadfile);
+                        long contentlength = Integer.parseInt(HttpResponse.getHeaders().getFirst("Content-Length"));
+                        byte b[] = new byte[10000];
+                        int r;
+                        long count = 0;
+                        while (true) {
+                            r = is.read(b, 0, 10000);
+                            fos.write(b, 0, r);
+                            count = count + r;
+                            int per = (int) (count * 100 / contentlength);
+                            if (count == contentlength) {
+                                break;
+                            }
+                        }
+                        fos.close();
+//                        JOptionPane.showMessageDialog(rootPane, "file downloaded");
+                        JOptionPane.showMessageDialog(rootPane, "File Downloaded", "UNI LMS Teacher View Assignment", JOptionPane.PLAIN_MESSAGE, ic);
+                        Desktop.getDesktop().open(new File(downloadfile));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+
+                    } finally {
+                        try {
+                            fos.close();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+
+            }).start();
+        
     }//GEN-LAST:event_downloadbtActionPerformed
 
     private void browsebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsebtActionPerformed
@@ -458,9 +471,11 @@ public class ViewAssignmentDetails extends javax.swing.JFrame {
                 String asid = st2.nextToken();
                 String title = st2.nextToken();
                 String details = st2.nextToken();
+                
 
                 String date = st2.nextToken();
                 date2 = st2.nextToken();
+                
 
                 namelb.setText(name);
                 assid.setText(asid);
@@ -468,6 +483,7 @@ public class ViewAssignmentDetails extends javax.swing.JFrame {
                 assdetails.setText(details);
                 assdate.setText(date);
                 assdate2.setText(date2);
+                
 
             }
         } catch (Exception ex) {

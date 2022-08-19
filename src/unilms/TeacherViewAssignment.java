@@ -503,7 +503,8 @@ public class TeacherViewAssignment extends javax.swing.JFrame {
                             }
                         }
                         fos.close();
-                        JOptionPane.showMessageDialog(rootPane, "file downloaded");
+//                        JOptionPane.showMessageDialog(rootPane, "file downloaded");
+                        JOptionPane.showMessageDialog(rootPane, "File Downloaded", "UNI LMS Teacher View Assignment", JOptionPane.PLAIN_MESSAGE, ic);
                         Desktop.getDesktop().open(new File(downloadfile));
                     } catch (Exception ex) {
                         ex.printStackTrace();

@@ -328,17 +328,11 @@ public class AdminAddTeacher extends javax.swing.JFrame {
                    {
 //                       String output = "Your Output is";
 //                       JOptionPane.showMessageDialog(this, "Your Teacher Id: "+feedback4+"\n Your Password is: "+pass);
-//                       JOptionPane.showMessageDialog(this, """
-//                                                                !!! Done !!!
-//                                                                Teacher Id Generated: """ + feedback4+
-//                                                                """ 
-//                                                               \nOTP/Temporary Password Generated: 
-//                                                                """+pass
-//                                                                 , "Uni LMS Admin Add Teacher", JOptionPane.PLAIN_MESSAGE, ic);
+                       JOptionPane.showMessageDialog(this, "!!! DONE !!! \n TEACHER ID GENERATED: "+feedback4, "UNI LMS Admin Add Teacher", JOptionPane.PLAIN_MESSAGE, ic);
                        
 //                       sms_sender.send(phone, "Teacher Id: "+ feedback4+"\nOTP/Temporary Password: "+pass);
                        
-                       sms_sender.send(phone,"UNI LMS Welcomes You! \nDear " +tname+ "!\nYou are now Enrolled as Teacher \nYour Teacher/Username Id is: "+feedback4+".\nYour Temporary Password is: "+pass+".\nPlease Change Your Password after First Login.");
+                       sms_sender.send(phone,"Dear " +tname+ "!\nYou are now Enrolled as Teacher.\nTeacher/Username Id: "+feedback4+".\nTemporary Password: "+pass+".\nRegards,\nUNI LMS");
                        
                     
                        tntf.setText(null);

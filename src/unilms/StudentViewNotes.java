@@ -6,9 +6,15 @@ package unilms;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -190,6 +196,11 @@ public class StudentViewNotes extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unilms/download-floppy-data.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
         jButton1.setBounds(1040, 160, 60, 60);
 
@@ -251,6 +262,58 @@ public class StudentViewNotes extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int index = jTable1.getSelectedRow();
+        if (index == -1) {
+
+        } else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    FileOutputStream fos = null;
+                    try {
+                        String filepath = al.get(index).file;
+                        HttpResponse<InputStream> HttpResponse = Unirest.get(GlobalClass.serverAddress+"getresource/" + filepath).asBinary();
+                        String filename = filepath.substring(filepath.lastIndexOf("/"));
+                        InputStream is = HttpResponse.getBody();
+                        fos = new FileOutputStream(System.getProperty("user.home") + "/Downloads/" + filename);
+                        String downloadfile = System.getProperty("user.home") + "/Downloads/" + filename;
+                        System.out.println("path---------  "+downloadfile);
+                        long contentlength = Integer.parseInt(HttpResponse.getHeaders().getFirst("Content-Length"));
+                        byte b[] = new byte[10000];
+                        int r;
+                        long count = 0;
+                        while (true) {
+                            r = is.read(b, 0, 10000);
+                            fos.write(b, 0, r);
+                            count = count + r;
+                            int per = (int) (count * 100 / contentlength);
+                            if (count == contentlength) {
+                                break;
+                            }
+                        }
+                        fos.close();
+//                        JOptionPane.showMessageDialog(rootPane, "file downloaded");
+                        JOptionPane.showMessageDialog(rootPane, "File Downloaded", "UNI LMS Student View Notes", JOptionPane.PLAIN_MESSAGE, ic);
+                        Desktop.getDesktop().open(new File(downloadfile));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+
+                    } finally {
+                        try {
+                            fos.close();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+
+            }).start();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void fetchnotes()
     {
         try

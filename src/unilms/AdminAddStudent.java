@@ -471,8 +471,8 @@ public class AdminAddStudent extends javax.swing.JFrame {
                         .field("photo", f)
                         .asString();
 
-                if (response.getStatus() == 200) {
-
+                if (response.getStatus() == 200) 
+                {
                     String feedback5 = response.getBody();
                     if (feedback5.equals("Fails!!!")) {
 //                        JOptionPane.showMessageDialog(this, "Fails!!!");
@@ -480,17 +480,16 @@ public class AdminAddStudent extends javax.swing.JFrame {
                                                                 !!! OOPS !!!
                                                                 Error Occured
                                                                 !!! Try Again !!!""", "Uni LMS Admin Add Student", JOptionPane.PLAIN_MESSAGE, ic);
-                    } else {
+                    } 
+                    else 
+                    {
 //                       String output = "Your Output is";
 //                        JOptionPane.showMessageDialog(this, "Your Student Id: " + feedback5 + "\n Your Password is: " + pass2);
-                        JOptionPane.showMessageDialog(this, """
-                                                                !!! Done !!!
-                                                                Student Id Generated: """ + feedback5+
-                                                                """ 
-                                                                \nOTP/Temporary Password Generated: 
-                                                                """+pass2
-                                                                 , "Uni LMS Admin Add Student", JOptionPane.PLAIN_MESSAGE, ic);
                         
+                        JOptionPane.showMessageDialog(this, "!!! DONE !!! \n STUDENT ID GENERATED: "+feedback5, "UNI LMS Admin Add Teacher", JOptionPane.PLAIN_MESSAGE, ic);
+                        
+                        sms_sender.send(mobile,"Dear " +studentname+ "!\nYou are now Enrolled as Student.\nStudent/Username Id: "+feedback5+".\nTemporary Password: "+pass2+".\nRegards,\nUNI LMS");
+
                         sntf.setText(null);
                         fntf.setText(null);
                         mntf.setText(null);
@@ -500,11 +499,14 @@ public class AdminAddStudent extends javax.swing.JFrame {
 
                     }
                 }
-                else {
+                else 
+                {
                     System.out.println(response.getStatusText());
                 }
 
-            } catch (Exception ex) {
+            } 
+            catch (Exception ex) 
+            {
                 ex.printStackTrace();
             }
 

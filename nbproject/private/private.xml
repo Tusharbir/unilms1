@@ -5,21 +5,19 @@
         <group>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/Server.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/AdminAddStudent.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/AdminChange.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/TeacherViewNotes.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/ViewAssignmentDetails.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/HomePage.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/TeacherGradeAssignment.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/AdminViewTeacher.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/QueryForumLoading.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/GradeAssignment.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/TeacherGradeAssignment.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/AdminViewCourse.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/MyServer.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/AdminHome.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/GlobalClass.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/StudentViewNotes.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/TeacherViewAssignment.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/StudentChat.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/AdminAddTeacher.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/StudentHomePage.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/sms_sender.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/TeacherHomePage.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/QuestionDetails.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/TeacherAddAssisgnment.java</file>
         </group>
     </open-files>
 </project-private>

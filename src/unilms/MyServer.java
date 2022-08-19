@@ -789,7 +789,7 @@ public class MyServer extends JHTTPServer {
                     date2 = rs.getString("subdate");
 
                     ans += id + ";;;" + title + ";;;" + details + ";;;" + name
-                            + ";;;" + date + ";;;" + date2 + ";;;"
+                            + ";;;" + date + ";;;" + date2 + ";;;" 
                             + "$$";
 
                 }
@@ -994,7 +994,36 @@ public class MyServer extends JHTTPServer {
 
             return new Response(HTTP_OK, "text/plain", ans);
 
-        } else if (uri.contains("/getresource")) {
+        } 
+        
+        
+        else if (uri.equals("/studentdownloadassignment")) {
+            try {
+
+                String dept = parms.getProperty("depart");
+                String course = parms.getProperty("course");
+                String sem = parms.getProperty("sem");
+                ResultSet rs = DBLoader.executeSQL("select * from assignment INNER JOIN teacher ON assignment.teacher_id = teacher.teacher_id where assignment.course_name=\'" + course + "\' and assignment.department = \'" + dept + "' and assignment.semester =\'" + sem + "\'");
+                String file = "";
+
+                while (rs.next()) {
+                   file=rs.getString("file");
+
+            
+
+                }
+                return new Response(HTTP_OK, "text/plain", file);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return new Response(HTTP_OK, "text/plain", ex.toString());
+            }
+
+        }
+        
+        
+        
+        
+        else if (uri.contains("/getresource")) {
             uri = uri.substring(1);
             uri = uri.substring(uri.indexOf("/") + 1);
             System.out.println(uri);
