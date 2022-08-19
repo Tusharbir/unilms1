@@ -942,53 +942,59 @@ public class MyServer extends JHTTPServer {
                 ex.printStackTrace();
                 return new Response(HTTP_OK, "text/plain", ex.toString());
             }
-        } 
-        
-        else if(uri.contains("/studentfetchchat"))
-        {
-            try
-            {
+        } else if (uri.contains("/studentfetchchat")) {
+            try {
                 String id = parms.getProperty("id");
-                
+
                 ResultSet rs = DBLoader.executeSQL("select * from  chat where student_id=\'" + id + "\'");
-                String answer,question,tname;
-                String feed="";
-                while(rs.next())
-                {
+                String answer, question, tname;
+                String feed = "";
+                while (rs.next()) {
                     answer = rs.getString("answer");
                     question = rs.getString("question");
                     tname = rs.getString("t_name");
-                    
-                    feed += question +";;;" + answer + ";;;" + tname + "#$#"; 
-                    
-                    
+
+                    feed += question + ";;;" + answer + ";;;" + tname + "#$#";
+
                 }
-                
+
                 return new Response(HTTP_OK, "text/plain", feed);
-                
-                
-                
-                
-                
-            }
-            
-            catch(Exception ex)
-            {
+
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 return new Response(HTTP_OK, "text/plain", ex.toString());
 
             }
-            
-            
-            
-        }
-        
-        
-        
-        
-        
-        
-        else if (uri.contains("/getresource")) {
+
+        } else if (uri.equals("/teachergradeassignment")) {
+            String ans = "";
+
+            try {
+
+                String id = parms.getProperty("id");
+
+                String subid, assid, sid, date, file;
+                ResultSet rs = DBLoader.executeSQL("select * from submission INNER JOIN assignemnt ON submission.assignment_id= assignemnt.assignment_id where assignment.teacher_id =\'" + id + "\'");
+
+                while (rs.next()) {
+                    subid = rs.getString("submission_id");
+                    assid = rs.getString("assignment_id");
+                    sid = rs.getString("student_id");
+                    date = rs.getString("date");
+                    file = rs.getString("file");
+
+                    ans += subid + ";;;" + assid + ";;;" + sid + ";;;" + date + ";;;" + file + "$$$";
+
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                //return new Response(HTTP_OK, "text/plain", ex.toString());
+            }
+
+            return new Response(HTTP_OK, "text/plain", ans);
+
+        } else if (uri.contains("/getresource")) {
             uri = uri.substring(1);
             uri = uri.substring(uri.indexOf("/") + 1);
             System.out.println(uri);

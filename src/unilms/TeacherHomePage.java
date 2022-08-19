@@ -326,6 +326,11 @@ public class TeacherHomePage extends javax.swing.JFrame {
         jButton5.setBorder(null);
         jButton5.setBorderPainted(false);
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton5);
         jButton5.setBounds(650, 190, 150, 140);
 
@@ -433,6 +438,13 @@ public class TeacherHomePage extends javax.swing.JFrame {
         TeacherViewQuestions obj = new TeacherViewQuestions();
         obj.setVisible(true);
     }//GEN-LAST:event_querybtActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        
+        TeacherGradeAssignment obj = new TeacherGradeAssignment();
+        obj.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

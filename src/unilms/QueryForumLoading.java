@@ -15,22 +15,28 @@ public class QueryForumLoading extends javax.swing.JFrame {
      */
     public QueryForumLoading() {
         initComponents();
-        try
-        {
-            Thread.sleep(500);
-            
-            
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        
-        dispose();
-        
-        
+
         setSize(434, 148);
         setLocationRelativeTo(null);
+        setVisible(true);
+
+        try {
+
+            for (int i = 0; i < 100; i++) {
+
+                Thread.sleep(10);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //go();
+        
+        this.dispose();
+
+        StudentChat obj = new StudentChat();
+
     }
 
     /**
@@ -46,6 +52,7 @@ public class QueryForumLoading extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
         getContentPane().setLayout(null);
 
@@ -94,7 +101,7 @@ public class QueryForumLoading extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QueryForumLoading().setVisible(true);
+                new QueryForumLoading().setVisible(false);
             }
         });
     }

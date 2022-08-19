@@ -4,18 +4,19 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/Server.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/ViewAssignmentDetails.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/AdminChange.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/HomePage.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/TeacherViewQuestions.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/AdminLoginScreen.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/TeacherGradeAssignment.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/AdminViewTeacher.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/QueryForumLoading.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/GradeAssignment.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/MyServer.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/TeacherViewAssignment.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/StudentChat.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/AdminAddTeacher.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/StudentHomePage.java</file>
+            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/sms_sender.java</file>
             <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/TeacherHomePage.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/QuestionDetails.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/TeacherAddAssisgnment.java</file>
-            <file>file:/C:/Users/tusha/Documents/unilms1/src/unilms/StudentViewAssignment.java</file>
         </group>
     </open-files>
 </project-private>

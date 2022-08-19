@@ -29,6 +29,23 @@ public class StudentChat extends javax.swing.JFrame {
 
     public StudentChat() {
         initComponents();
+        setSize(1145, 710);
+
+//        QueryForumLoading object = new QueryForumLoading();
+//        object.setVisible(true);
+//        
+//        try
+//        {
+//            Thread.sleep(500);
+//            object.dispose();
+//        }
+//        catch(Exception ex)
+//        {
+//            ex.printStackTrace();
+//        }
+        //object.dispose();
+      
+
         try {
             HttpResponse<String> response = Unirest.get("http://localhost:8080/studentsetname").queryString("id", studentid).asString();
 
@@ -44,12 +61,12 @@ public class StudentChat extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jChatArea.setContentType("text/html");
-        setSize(1145, 710);
         setTitle("Uni LMS Student-Teacher Query Forum");
         setResizable(false);
         setLocationRelativeTo(null);
-        
+
         loadchat();
+        setVisible(true);
     }
 
     /**
