@@ -20,8 +20,7 @@ public class DBLoader
            
            
             
-            String url="jdbc:mysql://tusharbirserver.mysql.database.azure.com:3306/unilms?useSSL=true";
-            Connection myDbConn=DriverManager.getConnection(url, "tusharbiradmin", "tbiu88WH5eL63sd");
+            // Azure Logins Hidden
 
             System.out.println("Connection done");
             
